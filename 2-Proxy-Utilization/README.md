@@ -1,26 +1,19 @@
- 6-NLP
-# NLP Pipeline
+# Proxy-utilisaton
 
-Attached are 10 JSON files (https://stackabuse.com/reading-and-writing-json-files-in-python-with-pandas) which contain entire web page data of 10 different web pages
+Web URLs block IP's that programmatically (web scrapers, bots etc) try to scrape their web content. This is because it overloads their websites and thus brings their site response time down and strains underlying infrastructure.
 
-You need to load these files data in Pandas and then perform the following tasks from NLP Pipeline :
+What is the solution ?
 
-1. Data Cleansing     - Remove any HTML data tags , strip spaces , punctuations and any other garbaage element present. Utilize Regular Expressions (Regex) for same
-2. Stop Words removal - Remove any stop words present in this data and *extend* stopwords corpus incase you find some other junk words present as well due to web scraping
-3. Tokenization - Split the remaining words into tokens , and tokenize all the text data
-4. Stemming - Perform stemming on the tokenized text data
-5. Lemmatization - Perform Lemmatization on stemmed data
-6. Bigram formation - Pair most frequently occuring words together , via bigram formation
+Rotating IP's via proxy is a standard solution used along with timer interval introduced while scraping :
 
-Your *output* should a Pandas dataframe with 2 columns - *Raw_Text , Processed_Text*
+Go through this link: https://www.scrapehero.com/how-to-rotate-proxies-and-ip-addresses-using-python-3/
 
-- **Raw Text** should contain each file text in raw form( i.e. as it is)  
-- **Processed_Text** should contain the same text after going through the NLP Pipeline as mentioned above.
+## Problem Statement
 
-Since there are 10 files , so there would be 10 records in this dataframe
+Hit the URL : https://fossbytes.com/10-best-free-music-websites-to-download-songs-legally/ ( or any particular URL of your choice), multiple times from your scraper and note the requests response ! While you 're getting 200 OK as response it's fine , but when it blocks you (as it did to me in session) then you 're going to re-route your IP via a proxy
 
-#### References
+To obtain various proxies , scrape https://free-proxy-list.net/ : free proxies listed over there via the html content which get refreshed every 10 mins (as per the site).
 
-- NLTK Library - https://www.nltk.org/
-- https://www.analyticsvidhya.com/blog/2020/11/text-cleaning-nltk-library/
+Use each of the proxy to access the web page that has blocked your IP and record the response of the webpage i.e 200 OK or some other response.We're trying to evaluate what percentage of these proxies work ( not all will) and the success hit ratio
 
+Do this for around 100 different proxies and summarize what %age were successful and what were not, along with your observations.
